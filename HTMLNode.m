@@ -76,7 +76,7 @@ __attribute__((objc_direct_members))
 	return array;
 }
 
-static void findChildrenWithTag(NSString *tagName, xmlNode *node, BOOL (^block)(HTMLNode *node))
+static void findChildrenWithTag(NSString *tagName, xmlNode *node, __attribute__((noescape)) BOOL (^block)(HTMLNode *node))
 {
     const char *tagNameStr =  [tagName UTF8String];
     findChildren(^BOOL(xmlNodePtr node) {
@@ -84,7 +84,7 @@ static void findChildrenWithTag(NSString *tagName, xmlNode *node, BOOL (^block)(
     }, node, block);
 }
 
-static BOOL findChildren(BOOL (^matchBlock)(xmlNodePtr node), xmlNode *node, BOOL (^block)(HTMLNode *node))
+static BOOL findChildren(BOOL (^matchBlock)(xmlNodePtr node), xmlNode *node, __attribute__((noescape)) BOOL (^block)(HTMLNode *node))
 {
     for (;node != nil; node = node->next)
 	{				
