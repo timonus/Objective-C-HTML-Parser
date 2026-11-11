@@ -42,12 +42,11 @@ __attribute__((objc_direct_members))
 			CFStringEncoding cfenc = CFStringConvertNSStringEncodingToEncoding(NSUTF8StringEncoding);
 			CFStringRef cfencstr = CFStringConvertEncodingToIANACharSetName(cfenc);
             const char *enc = [(__bridge NSString *)cfencstr UTF8String];
-			//_doc = htmlParseDoc((xmlChar*)[data bytes], enc);
-			
-			_doc = htmlReadDoc((xmlChar*)[data bytes],
-							 "",
-							enc,
-							XML_PARSE_NOERROR | XML_PARSE_NOWARNING);
+            _doc = htmlReadMemory((xmlChar*)[data bytes],
+                                  (int)data.length,
+                                  "",
+                                  enc,
+                                  XML_PARSE_NOERROR | XML_PARSE_NOWARNING);
 		}
 		else
 		{
